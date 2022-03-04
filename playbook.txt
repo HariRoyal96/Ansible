@@ -15,3 +15,27 @@
       state: started 
 
   
+
+---
+ - name: tomcat install & start 
+   hosts:all
+   become:true
+   
+   task:
+   - name: Tomcat install
+     yum:
+      name: tomcat
+      state: latest
+   
+   - name: start tomcat
+      service:
+      name: tomcat
+      state: started 
+
+   - name: create username tomcatadmin
+     name: tomcatadmin
+     group:users,admin
+     shell:/bin/bash
+     home:/home/weblogic
+
+      
